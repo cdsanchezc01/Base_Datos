@@ -15,6 +15,7 @@ CREATE TABLE Alojamiento (
     calle VARCHAR(100) NOT NULL,
     num TINYINT UNSIGNED,
     cp INT NOT NULL,
+	cod_empleado INT UNSIGNED,
     num_habitaciones SMALLINT UNSIGNED,
     CONSTRAINT PK_Alojamiento PRIMARY KEY (id),
     CONSTRAINT CHK_num_habitaciones CHECK (num_habitaciones <= 200)
@@ -61,14 +62,14 @@ CREATE TABLE Organiza (
 -- creacion de FK
 
 alter table Alojamiento add constraint FK_Alojamiento foreign key (id) references Cod_Postal(cp);
-alter table Alojamiento add constraint FK_Alojamiento foreign key (id) references 
+alter table Alojamiento add constraint FK_Alojamiento_em foreign key (cod_empleado) references 
 Empleado(cod_empleado) ON UPDATE CASCADE ON DELETE CASCADE;
-alter table Empleado add constraint FK_Empleado foreign key (cod_empleado) references
+alter table Empleado add constraint FK_Empleado foreign key (id_alojamiento) references
  Alojamiento(id) ON UPDATE CASCADE ON DELETE CASCADE;
 alter table Habitacion add constraint FK_Habitacion foreign key (id_alojamiento, numero) references Alojamiento(id);
 alter table Organiza add constraint FK_Organiza foreign key (id_alojamiento,cod_actividad) references 
 Alojamiento(id) ON UPDATE CASCADE ON DELETE CASCADE;
-alter table Organiza add constraint FK_Organiza foreign key (id_alojamiento,cod_actividad) references Actividad(cod_actividad);
+alter table Organiza add constraint FK_Organiza_ac foreign key (id_alojamiento,cod_actividad) references Actividad(cod_actividad);
  
 
 
