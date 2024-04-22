@@ -25,6 +25,10 @@ select * from departamento where nombre = 'IT' or nombre = 'Finanzas';
 
 select * from departamento where edificio like '%C' and nombre = 'Ventas';
 
+select nombre, ape1, ape2 from empleado order by nombre, ape1 desc;
+
+	
+
 
 
 
