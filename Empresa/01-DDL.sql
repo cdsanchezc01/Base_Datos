@@ -1,0 +1,21 @@
+CREATE DATABASE tienda;
+
+USE tienda;
+
+
+
+CREATE TABLE fabricante (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+);
+
+
+
+CREATE TABLE producto (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    precio DOUBLE NOT NULL,
+    id_fabricante INT UNSIGNED NOT NULL,
+    CONSTRAINT FK_PROD_FAB FOREIGN KEY (id_fabricante)
+        REFERENCES fabricante (id)
+);
