@@ -2,12 +2,9 @@ use unidad5;
 
 select * from departamento;
 
-
 select edificio from departamento;
 
-
 select distinct edificio from departamento;
-
 
 select edificio 'SEDES', nombre from departamento;
 select edificio 'SEDES', nombre as 'Nombre departamento' from departamento;
@@ -18,23 +15,17 @@ select edificio 'SEDES', nombre as 'Nombre departamento' from departamento;
 -- Error Code: 1146. Table 'unidad5.departamentossssss' doesn't exist
 -- select edificio from departamentossssss;
 
-
 select departamento.edificio from departamento;
 
-
 select * from departamento where id = 4;
-
 
 select * from departamento where id = 4 or id = 2;
 select * from departamento where id in (2, 4);
 
-
 select * from departamento where nombre = 'IT' or nombre = 'Finanzas';
 select * from departamento where nombre in ('IT', 'Finanzas');
 
-
 select * from departamento where edificio like '%C' and nombre = 'Ventas';
-
 
 select nombre, ape1, ape2 from empleado order by nombre, ape1 desc;
 
@@ -122,22 +113,24 @@ select min(edad) as edad_minima from empleado;
 select round(avg(salario),2) as salario_promedio from empleado;
 
 -- Contar el número de empleados por departamento. Si el departamento es nulo, poner 'Sin Dpto'
--- select departamento, count(*) as numero_empleados from empleadon
+select ifnull(departamento_id, 'Sin Dpto'), count(id)
+from empleado
+group by departamento_id;
 
 -- Encontrar el salario máximo por departamento. Si el departamento es nulo, poner 'Sin Dpto'
-select departamento,
-case 
-when departamento is null then 'Sin Dpto'
-else departamento
-end as departameto,
-max(salario) as salario_maximo
-from empleados
-group by departemento;
+select ifnull(departamento_id, 'Sin Dpto'), max(salario)
+from empleado
+group by departamento_id;
 
 -- Encontrar el salario mínimo por departamento. Si el departamento es nulo, poner 'Sin Dpto'
-
+select ifnull(departamento_id, 'Sin Dpto'), min(salario)
+from empleado
+group by departamento_id;
 
 -- Calcular el salario promedio por departamento. Si el departamento es nulo, poner 'Sin Dpto'. Redondeado a 2 decimales
+select ifnull(departamento_id, 'Sin Dpto'), round(avg(salario),2)
+from empleado
+group by departamento_id;
 
 
 -- Calcular el total de comisiones por departamento. Si el departamento es nulo, poner 'Sin Dpto'
