@@ -132,33 +132,63 @@ select ifnull(departamento_id, 'Sin Dpto'), round(avg(salario),2)
 from empleado
 group by departamento_id;
 
-
 -- Calcular el total de comisiones por departamento. Si el departamento es nulo, poner 'Sin Dpto'
-
+select ifnull(departamento_id, 'Sin dpto'), sum(comision)
+from empleado
+group by departamento_id;
 
 -- Encontrar el salario máximo de los empleados por departamento, siempre que el departamento no sea nulo. Ordenar de mayor a menor salario.
-
+select max(salario) 'maximo', deaprtamento_id
+from empleado
+where departamento_id is not null
+group by deapartamento_id
+order by departamento_id
+limit 3;
 
 -- Modifica la anterior consulta para sacar solo los 3 departamentos que mas ganan.
-
+select max(salario) 'maximo', deaprtamento_id
+from empleado
+where departamento_id is not null
+group by deapartamento_id
+order by maximo desc
+limit 3;
 
 -- Encontrar el salario máximo de los empleados por departamento, siempre que el departamento no sea nulo. Solo debe obtener aquellos máximos mayores de 50000. Ordenar de mayor a menor salario.
-
+select max(salario) 'maximo', departamento_id
+from empleado
+where departamento_id is not null
+group by departamento_id
+having maximo > 50000
+order by maximo desc;
 
 -- Consulta de empleados obteniendo su nombre_completo y salario. Siempre que el salario sea mayor de 25000 ordena por nombre_completo.
-select concat(nombre,' ', ape1, ' ', ifnull(ape2, ' ')) as nombre_completo, salario from empleado where salario > 2500 order by nombre_completo;
+select concat(nombre,' ', ape1, ' ', ifnull(ape2, ' ')) as nombre_completo, salario 
+from empleado
+where salario > 2500 
+order by nombre_completo;
 
 -- Consulta de empleados obteniendo su nombre_completo, edad, salario, siempre que estos tenga edad entre 20-30 años y su salario oscile entre 25000-32000 ordena de manera descendente por salario. Con between.
-select concat(nombre,' ', ape1, ' ', ifnull(ape2, ' ')) as nombre_completo, edad, salario from empleado where edad;
+select concat(nombre,' ', ape1, ' ', ifnull(ape2, ' ')) as nombre_completo, edad, salario 
+from empleado 
+where salario between 25000 and 32000
+and edad  between 20 and 30
+order by salario desc;
 
 -- Consulta de empleados obteniendo su nombre_completo, edad, salario, siempre que estos tenga edad entre 20-30 años y su salario oscile entre 25000-32000 ordena de manera descendente por salario. Sin between.
-select concat(nombre,' ', ape1, ' ', ifnull(ape2, ' ')) as nombre_completo, edad, salario from empleado where edad;
+select concat(nombre,' ', ape1, ' ', ifnull(ape2, ' ')) as nombre_completo, edad, salario 
+from empleado 
+where (salario >= 25000 and salario <= 32000)
+and (edad <= 20 and edad <= 30)
+order by salario desc;
 
 -- Consulta todos los empleados (tanto internos como externos) mostrando nombre + 1 apellido + 2 apellido (en una columna llamada nombre completo), fecha_contratacion o subcontratacion, y tipo ('Interno o Subcontratado'). Quitando repetidos.
 -- Ordena por nombre_completo
-
-
-
+select concat(nombre, ' ', ape1, ' ', ifnull(ape2, ' ')) ' nombre_completo', fecha_contratacion fecha, 'interno tipo'
+from empleado
+union 
+ select concat(nombre, ' ', ape1, ' ', ifnull(ape2, ' ')) ' nombre_completo', fecha_contratacion fecha, 'subcontratado' tipo
+from emplado externo  
+order by nombre_completo;
 
 -- Consulta todos los empleados (tanto internos como externos) mostrando nombre + 1 apellido + 2 apellido (en una columna llamada nombre completo), fecha_contratacion o subcontratacion, y tipo ('Interno o Subcontratado'). Con repetidos.
 -- Ordena por nombre_completo
@@ -167,30 +197,25 @@ select concat(nombre,' ', ape1, ' ', ifnull(ape2, ' ')) as nombre_completo, edad
 
 
 -- Consulta los años que lleva cada empleado externo trabajando, mostrar el id, nombre, apellido1, fecha_subcontratacion y num años. Trunca a la baja el numero de años.
-SELECT 
-    id_empleado,
-    nombre,
-    apellido1,
-    fecha_subcontratacion,
-    YEAR(CURRENT_DATE) - YEAR(fecha_subcontratacion) AS num_anios
-FROM empleados_externos;
-
 
 
 
 -- Partiendo de la consulta anterior obten el que mas tiempo lleva trabajando. Solo debe devolver un registro
 
-SELECT id_empleado, nombre, apellido1, fecha_subcontratacion, YEAR(CURRENT_DATE) - YEAR(fecha_subcontratacion) AS num_anios FROM empleados_externos ORDER BY num_anios DESC LIMIT 1;
+
 
 
 
 -- Consulta cuantos empleados por departamento existen que tenga un salario de más de 40000 y que cobren comision.  Debe aparecer el id_departamento y el total por departamento
-SELECT id_departamento, COUNT(*) AS total_empleados FROM nombre_de_tabla WHERE salario > 40000 AND comisiones IS NOT NULL GROUP BY id_departamento;
-
-
-
+select deapartamento_id, count(id)
+from empleado
+where salario >= 40000 and comision is not null
+group by deapartamento_id;
 
 -- Consulta los datos de la venta realizada por el empleado 1 ordenados por fecha mas reciente
+select *
+from venta
+where empleado_id = 1
 
 
 
@@ -232,6 +257,7 @@ SELECT id_departamento, COUNT(*) AS total_empleados FROM nombre_de_tabla WHERE s
 -- > 55 = Plan mayores de 55
 -- > 35 = Sin ventajas
 -- Resto = Plan joven 
+
 
 
 
