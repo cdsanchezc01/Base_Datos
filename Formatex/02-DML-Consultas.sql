@@ -21,10 +21,17 @@ from ciclo
 where sigla like 'D%';
 
 -- Selecciona todos los profesores del departamento de Informática.
-select p.nombre   
+-- Join
+select p.*  
 from profesor p
 join departamento d on p.cod_dpto = d.cod_dpto
 where d.nombre = 'Informatica';
+
+-- SUb select Fijate es  como 2 cosultas en 1 
+select p.*  
+from profesor p
+where p.cod_dpto = (select d.cod_dpto from departamento d where d.nombre = 'Informatica');
+
 
 -- Muestra el nombre completo de los profesores que no tienen un segundo apellido.
 select concat_ws(' ', nombre, prApellido, sgApellido) as nombre_completo
