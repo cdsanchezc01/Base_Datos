@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones</title>
+    <style>
+        body {
+            display: flex;
+        }
+        @media only screen and (max-width: 950px) {
+            body {
+                flex-wrap: wrap;
+                flex-direction: column;
+            }
+        }
+
+        caption {
+            padding: 5px;
+            background-color: #373737;
+            color: #f2f2f2;
+        }
+
+        table {
+            border-collapse: collapse;
+            flex-direction: row;
+            margin: 1%;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 4px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <caption>NÚMEROS</caption>
+        <tbody>
+            <tr>
+                <td>ABS(num)</td>
+            </tr>
+            <tr>
+                <td>ROUND(num, dec)</td>
+            </tr>
+            <tr>
+                <td>CEIL(num) o CEILING(num)</td>
+            </tr>
+            <tr>
+                <td>FLOOR(num)</td>
+            </tr>
+            <tr>
+                <td>RAND()</td>
+            </tr>
+            <tr>
+                <td>SQRT(num)</td>
+            </tr>
+            <tr>
+                <td>POWER(num, exp)</td>
+            </tr>
+            <tr>
+                <td>MOD(dividendo, divisor)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <caption>CADENAS</caption>
+        <tbody>
+            <tr>
+                <td>CONCAT(str1, str2, ...)</td>
+            </tr>
+            <tr>
+                <td>CONCAT_WS(separator, str1, str2, ...)</td>
+            </tr>
+            <tr>
+                <td>LOWER(str)</td>
+            </tr>
+            <tr>
+                <td>UPPER(str)</td>
+            </tr>
+            <tr>
+                <td>SUBSTR(str, start, length)</td>
+            </tr>
+            <tr>
+                <td>LEFT(str, length)</td>
+            </tr>
+            <tr>
+                <td>RIGHT(str, length)</td>
+            </tr>
+            <tr>
+                <td>CHAR_LENGTH(str)</td>
+            </tr>
+            <tr>
+                <td>LENGTH(str)</td>
+            </tr>
+            <tr>
+                <td>REVERSE(str)</td>
+            </tr>
+            <tr>
+                <td>LTRIM(str)</td>
+            </tr>
+            <tr>
+                <td>RTRIM(str)</td>
+            </tr>
+            <tr>
+                <td>TRIM(str)</td>
+            </tr>
+            <tr>
+                <td>REPLACE(str, old_substring, new_substring)</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <table>
+        <caption>FECHAS</caption>
+        <tbody>
+            <tr>
+                <td>NOW()</td>
+            </tr>
+            <tr>
+                <td>CURDATE()</td>
+            </tr>
+            <tr>
+                <td>CURTIME()</td>
+            </tr>
+            <tr>
+                <td>DATE_FORMAT(fecha, formato) <br>SELECT DATE_FORMAT(NOW(), '%d-%m-%Y');</td>
+            </tr>
+            <tr>
+                <td>DATE_ADD(fecha, INTEVAL x DAY)</td>
+            </tr>
+            <tr>
+                <td>DATE_SUB(fecha, INTEVAL x WEEK)</td>
+            </tr>
+            <tr>
+                <td>DATEDIFF(fecha, otra_fecha)</td>
+            </tr>
+            <tr>
+                <td>YEAR(fecha)</td>
+            </tr>
+            <tr>
+                <td>MONTH(fecha)</td>
+            </tr>
+            <tr>
+                <td>MONTHNAME(fecha)</td>
+            </tr>
+            <tr>
+                <td>DAY(fecha)</td>
+            </tr>
+            <tr>
+                <td>DAYNAME(fecha)</td>
+            </tr>
+            <tr>
+                <td>HOUR(fecha)</td>
+            </tr>
+            <tr>
+                <td>MINUTE(fecha)</td>
+            </tr>
+            <tr>
+                <td>SECOND(fecha)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <caption>OTRAS</caption>
+        <tbody>
+            <tr>
+                <td>CASE</td>
+                <td>
+                    SELECT nombre,<br>
+                    salario,<br>
+                    CASE<br>
+                    WHEN salario &gt; 50000 THEN 'Alto'<br>
+                    WHEN salario &gt; 30000 THEN 'Medio'<br>
+                    ELSE 'Bajo'<br>
+                    END AS nivel_salario<br>
+                    FROM empleado;
+                </td>
+            </tr>
+            <tr>
+                <td>IFNULL()</td>
+                <td>SELECT nombre,<br>
+                    IFNULL(ape2, 'Apellido2 no disponible') AS apellido2<br>
+                    FROM empleado;
+                </td>
+            </tr>
+            <tr>
+                <td>COALESCE()</td>
+                <td>SELECT nombre, COALESCE(ape1, ape2,'') AS apellido
+                    FROM empleado;
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <caption>AGREGADAS</caption>
+        <tbody>
+            <tr>
+                <td>COUNT(col) o COUNT(*) o COUNT(1)</td>
+            </tr>
+            <tr>
+                <td>SUM(col)</td>
+            </tr>
+            <tr>
+                <td>AVG(col)</td>
+            </tr>
+            <tr>
+                <td>MIN(col)</td>
+            </tr>
+            <tr>
+                <td>MAX(col)</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
